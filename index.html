@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pitman Shorthand</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #172033;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+      opacity: 0.85;
+    }
+
+    nav {
+      background: white;
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    nav a {
+      color: #172033;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hero h2 {
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .converter {
+      background: white;
+      padding: 22px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 140px;
+      padding: 15px;
+      font-size: 17px;
+      border: 2px solid #d8deea;
+      border-radius: 10px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #172033;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #172033;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #f4f7fb;
+      border-radius: 10px;
+      min-height: 100px;
+    }
+
+    .section {
+      background: white;
+      padding: 22px;
+      margin-top: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .section h2 {
+      margin-bottom: 12px;
+    }
+
+    .section p {
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 40px;
+      background: #172033;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>✍️ Pitman Shorthand</h1>
+    <p>Learn Pitman Shorthand and convert English text into shorthand</p>
+  </header>
+
+  <nav>
+    <a href="#converter">Converter</a>
+    <a href="#learn">Learn</a>
+    <a href="#history">History</a>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <h2>English → Pitman Shorthand</h2>
+      <p>Type English text below to get its shorthand representation.</p>
+    </section>
+
+    <section class="converter" id="converter">
+
+      <textarea id="englishText"
+        placeholder="Type something here...&#10;&#10;Example: I am a boy"></textarea>
+
+      <button onclick="convertText()">Convert to Shorthand</button>
+
+      <div class="result" id="result">
+        Your shorthand result will appear here.
+      </div>
+
+    </section>
+
+    <section class="section" id="learn">
+      <h2>Learn Pitman Shorthand</h2>
+      <p>
+        Pitman Shorthand is a phonetic shorthand system designed to represent
+        the sounds of spoken language efficiently. This website will contain
+        lessons, rules, consonants, vowels, abbreviations, examples and other
+        learning resources.
+      </p>
+    </section>
+
+    <section class="section" id="history">
+      <h2>History of Shorthand</h2>
+      <p>
+        This section will contain the history of shorthand and the development
+        of the Pitman Shorthand system.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Pitman Shorthand Project</p>
+  </footer>
+
+  <script>
+    function convertText() {
+
+      const text = document.getElementById("englishText").value.trim();
+      const result = document.getElementById("result");
+
+      if (text === "") {
+        result.innerHTML = "Please enter some English text.";
+        return;
+      }
+
+      result.innerHTML =
+        "<strong>Input:</strong><br>" +
+        text +
+        "<br><br>" +
+        "<strong>Pitman shorthand:</strong><br>" +
+        "Converter engine will be added in the next stages.";
+
+    }
+  </script>
+
+</body>
+</html>
