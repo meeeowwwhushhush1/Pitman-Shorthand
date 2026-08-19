@@ -48,26 +48,15 @@ vowels: {
   ]
 },
 consonants: {
-  p:  { sound: "p",  stroke: "straight", weight: "light" },
-  b:  { sound: "b",  stroke: "straight", weight: "heavy" },
+  p:  { sound: "p",  direction: "down45", weight: "light" },
+  b:  { sound: "b",  direction: "down45", weight: "heavy" },
 
-  t:  { sound: "t",  stroke: "straight", weight: "light" },
-  d:  { sound: "d",  stroke: "straight", weight: "heavy" },
+  t:  { sound: "t",  direction: "down90", weight: "light" },
+  d:  { sound: "d",  direction: "down90", weight: "heavy" },
 
-  k:  { sound: "k",  stroke: "straight", weight: "light" },
-  g:  { sound: "g",  stroke: "straight", weight: "heavy" },
+  ch: { sound: "ch", direction: "down30", weight: "light" },
+  j:  { sound: "j",  direction: "down30", weight: "heavy" },
 
-  f:  { sound: "f",  stroke: "straight", weight: "light" },
-  v:  { sound: "v",  stroke: "straight", weight: "heavy" },
-
-  m:  { sound: "m",  stroke: "straight", weight: "light" },
-  n:  { sound: "n",  stroke: "straight", weight: "heavy" },
-
-  r:  { sound: "r",  stroke: "straight", weight: "light" },
-  l:  { sound: "l",  stroke: "straight", weight: "heavy" },
-
-  w:  { sound: "w",  stroke: "straight", weight: "light" },
-  y:  { sound: "y",  stroke: "straight", weight: "light" },
-
-  h:  { sound: "h",  stroke: "straight", weight: "light" }
+  k:  { sound: "k",  direction: "horizontal", weight: "light" },
+  g:  { sound: "g",  direction: "horizontal", weight: "heavy" }
 },
