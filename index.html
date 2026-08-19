@@ -298,9 +298,7 @@
 </footer>
 
 <script>
-
 function convertText() {
-
   const text = document
     .getElementById("englishText")
     .value
@@ -313,14 +311,35 @@ function convertText() {
     return;
   }
 
-  result.innerHTML =
-    "<strong>English:</strong><br>" +
-    text +
-    "<br><br>" +
-    "<strong>Pitman:</strong><br>" +
-    "Accurate Pitman conversion engine coming next.";
+  result.innerHTML = "";
 
-}
+  const title = document.createElement("div");
+  title.innerHTML =
+    "<strong>English:</strong><br>" + text;
+
+  result.appendChild(title);
+
+  const pitmanTitle = document.createElement("div");
+  pitmanTitle.innerHTML =
+    "<br><strong>Pitman:</strong>";
+
+  result.appendChild(pitmanTitle);
+
+  const svg = PitmanRenderer.createSVG(700, 220);
+
+  // Temporary renderer test stroke.
+  // Actual Pitman stroke mapping comes next.
+  PitmanRenderer.drawLine(
+    svg,
+    120,
+    120,
+    300,
+    120,
+    "light"
+  );
+
+  result.appendChild(svg);
+  }
 
 </script>
 <script src="pitman.js"></script>
