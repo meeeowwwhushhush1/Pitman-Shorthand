@@ -67,28 +67,7 @@ const PitmanRenderer = {
 
     return circle;
   },
-  drawStroke(svg, stroke, x, y, size = 80, weight = "light") {
-
-    const paths = {
-      down45: [x, y, x + size * 0.7, y + size],
-      down90: [x, y, x, y + size],
-      down30: [x, y, x + size * 0.5, y + size],
-      horizontal: [x, y, x + size, y]
-    };
-
-    const p = paths[stroke];
-
-    if (!p) return null;
-
-    return this.drawLine(
-      svg,
-      p[0],
-      p[1],
-      p[2],
-      p[3],
-      weight
-    );
-  },
+  
   drawDash(svg, x1, y1, x2, y2, weight = "light") {
 
     return this.drawLine(
