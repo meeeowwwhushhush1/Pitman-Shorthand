@@ -81,25 +81,6 @@ const PitmanRenderer = {
   }
 
 };
+};
+
 drawStroke(svg, stroke, x, y, size = 80, weight = "light") {
-
-  const paths = {
-    slantDownRight: [x, y, x + size, y + size],
-    slantUpRight: [x, y + size, x + size, y],
-    vertical: [x, y, x, y + size],
-    horizontal: [x, y, x + size, y]
-  };
-
-  const p = paths[stroke];
-
-  if (!p) return null;
-
-  return this.drawLine(
-    svg,
-    p[0],
-    p[1],
-    p[2],
-    p[3],
-    weight
-  );
-},
