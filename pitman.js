@@ -47,3 +47,27 @@ vowels: {
     { sound: "oo", type: "dash", weight: "light", position: 3 }
   ]
 },
+consonants: {
+  p:  { sound: "p",  stroke: "straight", weight: "light" },
+  b:  { sound: "b",  stroke: "straight", weight: "heavy" },
+
+  t:  { sound: "t",  stroke: "straight", weight: "light" },
+  d:  { sound: "d",  stroke: "straight", weight: "heavy" },
+
+  k:  { sound: "k",  stroke: "straight", weight: "light" },
+  g:  { sound: "g",  stroke: "straight", weight: "heavy" },
+
+  f:  { sound: "f",  stroke: "straight", weight: "light" },
+  v:  { sound: "v",  stroke: "straight", weight: "heavy" },
+
+  m:  { sound: "m",  stroke: "straight", weight: "light" },
+  n:  { sound: "n",  stroke: "straight", weight: "heavy" },
+
+  r:  { sound: "r",  stroke: "straight", weight: "light" },
+  l:  { sound: "l",  stroke: "straight", weight: "heavy" },
+
+  w:  { sound: "w",  stroke: "straight", weight: "light" },
+  y:  { sound: "y",  stroke: "straight", weight: "light" },
+
+  h:  { sound: "h",  stroke: "straight", weight: "light" }
+},
