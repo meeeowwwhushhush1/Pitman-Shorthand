@@ -13,74 +13,98 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      background: #f5f7fb;
       color: #172033;
+      line-height: 1.6;
     }
 
     header {
       background: #172033;
       color: white;
-      padding: 25px 20px;
+      padding: 28px 18px;
       text-align: center;
     }
 
     header h1 {
       font-size: 30px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     header p {
-      font-size: 15px;
       opacity: 0.85;
     }
 
     nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
       background: white;
+      border-bottom: 1px solid #ddd;
       padding: 12px;
       text-align: center;
-      border-bottom: 1px solid #ddd;
+      overflow-x: auto;
+      white-space: nowrap;
     }
 
     nav a {
+      display: inline-block;
       color: #172033;
       text-decoration: none;
-      margin: 0 10px;
       font-weight: bold;
+      margin: 0 9px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
     }
 
     main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 18px;
+      max-width: 950px;
+      margin: auto;
+      padding: 25px 16px;
     }
 
     .hero {
       text-align: center;
-      margin-bottom: 30px;
+      padding: 25px 0;
     }
 
     .hero h2 {
-      font-size: 26px;
-      margin-bottom: 10px;
+      font-size: 28px;
+      margin-bottom: 8px;
     }
 
-    .converter {
+    .hero p {
+      color: #596273;
+    }
+
+    .card {
       background: white;
+      border-radius: 16px;
       padding: 22px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 22px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    }
+
+    .card h2 {
+      margin-bottom: 12px;
     }
 
     textarea {
       width: 100%;
-      min-height: 140px;
-      padding: 15px;
-      font-size: 17px;
-      border: 2px solid #d8deea;
-      border-radius: 10px;
+      min-height: 150px;
       resize: vertical;
+      padding: 15px;
+      border: 2px solid #d9deea;
+      border-radius: 12px;
+      font-size: 17px;
+      font-family: inherit;
       outline: none;
     }
 
@@ -88,12 +112,12 @@
       border-color: #172033;
     }
 
-    button {
+    .button {
       width: 100%;
-      margin-top: 15px;
+      margin-top: 14px;
       padding: 14px;
       border: none;
-      border-radius: 10px;
+      border-radius: 11px;
       background: #172033;
       color: white;
       font-size: 17px;
@@ -101,121 +125,204 @@
       cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.9;
+    .button:active {
+      transform: scale(0.99);
     }
 
     .result {
-      margin-top: 20px;
-      padding: 20px;
-      background: #f4f7fb;
-      border-radius: 10px;
+      margin-top: 18px;
       min-height: 100px;
+      padding: 18px;
+      background: #f5f7fb;
+      border-radius: 12px;
+      border: 1px solid #e0e4ec;
     }
 
-    .section {
-      background: white;
-      padding: 22px;
-      margin-top: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    .notice {
+      padding: 13px;
+      background: #fff7df;
+      border-radius: 10px;
+      margin-top: 15px;
+      color: #5f4b00;
     }
 
-    .section h2 {
-      margin-bottom: 12px;
+    .search {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #d9deea;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
     }
 
-    .section p {
-      line-height: 1.7;
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .topic {
+      background: #f5f7fb;
+      border: 1px solid #e0e4ec;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      font-weight: bold;
     }
 
     footer {
-      text-align: center;
-      padding: 30px;
-      margin-top: 40px;
       background: #172033;
       color: white;
+      text-align: center;
+      padding: 28px 15px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .hero h2 {
+        font-size: 23px;
+      }
+
+      main {
+        padding: 18px 12px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>✍️ Pitman Shorthand</h1>
-    <p>Learn Pitman Shorthand and convert English text into shorthand</p>
-  </header>
+<header>
+  <h1>✍️ Pitman Shorthand</h1>
+  <p>Learn, search and explore Pitman Shorthand</p>
+</header>
 
-  <nav>
-    <a href="#converter">Converter</a>
-    <a href="#learn">Learn</a>
-    <a href="#history">History</a>
-  </nav>
+<nav>
+  <a href="#converter">Converter</a>
+  <a href="#learn">Learn</a>
+  <a href="#history">History</a>
+  <a href="#dictionary">Dictionary</a>
+  <a href="#resources">Resources</a>
+</nav>
 
-  <main>
+<main>
 
-    <section class="hero">
-      <h2>English → Pitman Shorthand</h2>
-      <p>Type English text below to get its shorthand representation.</p>
-    </section>
+  <section class="hero">
+    <h2>English → Pitman Shorthand</h2>
+    <p>Enter English text and get its Pitman Shorthand representation.</p>
+  </section>
 
-    <section class="converter" id="converter">
+  <section class="card" id="converter">
+    <h2>🔤 Shorthand Converter</h2>
 
-      <textarea id="englishText"
-        placeholder="Type something here...&#10;&#10;Example: I am a boy"></textarea>
+    <textarea id="englishText"
+      placeholder="Type English text here...&#10;&#10;Example: I am a boy"></textarea>
 
-      <button onclick="convertText()">Convert to Shorthand</button>
+    <button class="button" onclick="convertText()">
+      Convert to Pitman Shorthand
+    </button>
 
-      <div class="result" id="result">
-        Your shorthand result will appear here.
-      </div>
+    <div class="result" id="result">
+      Your result will appear here.
+    </div>
 
-    </section>
+    <div class="notice">
+      ⚠️ The accurate Pitman conversion engine is being developed.
+      The current interface is ready for the conversion system.
+    </div>
+  </section>
 
-    <section class="section" id="learn">
-      <h2>Learn Pitman Shorthand</h2>
-      <p>
-        Pitman Shorthand is a phonetic shorthand system designed to represent
-        the sounds of spoken language efficiently. This website will contain
-        lessons, rules, consonants, vowels, abbreviations, examples and other
-        learning resources.
-      </p>
-    </section>
+  <section class="card" id="learn">
+    <h2>📚 Learn Pitman Shorthand</h2>
 
-    <section class="section" id="history">
-      <h2>History of Shorthand</h2>
-      <p>
-        This section will contain the history of shorthand and the development
-        of the Pitman Shorthand system.
-      </p>
-    </section>
+    <input
+      class="search"
+      type="search"
+      placeholder="Search a Pitman topic..."
+    >
 
-  </main>
+    <div class="topics">
+      <div class="topic">Consonants</div>
+      <div class="topic">Vowels</div>
+      <div class="topic">Diphthongs</div>
+      <div class="topic">Circles</div>
+      <div class="topic">Loops</div>
+      <div class="topic">Hooks</div>
+      <div class="topic">Halving</div>
+      <div class="topic">Doubling</div>
+      <div class="topic">Grammalogues</div>
+      <div class="topic">Phraseography</div>
+    </div>
+  </section>
 
-  <footer>
-    <p>© 2026 Pitman Shorthand Project</p>
-  </footer>
+  <section class="card" id="history">
+    <h2>📖 History of Shorthand</h2>
+    <p>
+      This section will explain the history of shorthand, the development
+      of Pitman Shorthand, and its evolution over time.
+    </p>
+  </section>
 
-  <script>
-    function convertText() {
+  <section class="card" id="dictionary">
+    <h2>🔎 Pitman Dictionary</h2>
 
-      const text = document.getElementById("englishText").value.trim();
-      const result = document.getElementById("result");
+    <input
+      class="search"
+      type="search"
+      placeholder="Search for an English word..."
+    >
 
-      if (text === "") {
-        result.innerHTML = "Please enter some English text.";
-        return;
-      }
+    <div class="result">
+      Search results will appear here.
+    </div>
+  </section>
 
-      result.innerHTML =
-        "<strong>Input:</strong><br>" +
-        text +
-        "<br><br>" +
-        "<strong>Pitman shorthand:</strong><br>" +
-        "Converter engine will be added in the next stages.";
+  <section class="card" id="resources">
+    <h2>📚 Books & Resources</h2>
+    <p>
+      This section will contain useful learning resources, references,
+      historical material and legally usable public-domain resources.
+    </p>
+  </section>
 
-    }
-  </script>
+</main>
+
+<footer>
+  <p>© 2026 Pitman Shorthand Project</p>
+  <p>Built as an educational resource.</p>
+</footer>
+
+<script>
+
+function convertText() {
+
+  const text = document
+    .getElementById("englishText")
+    .value
+    .trim();
+
+  const result = document.getElementById("result");
+
+  if (!text) {
+    result.innerHTML = "Please enter some English text.";
+    return;
+  }
+
+  result.innerHTML =
+    "<strong>English:</strong><br>" +
+    text +
+    "<br><br>" +
+    "<strong>Pitman:</strong><br>" +
+    "Accurate Pitman conversion engine coming next.";
+
+}
+
+</script>
 
 </body>
 </html>
