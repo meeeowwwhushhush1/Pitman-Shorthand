@@ -1,10 +1,8 @@
 // Pitman Shorthand SVG Renderer
-// Initial renderer foundation.
 
 const PitmanRenderer = {
 
   createSVG(width = 700, height = 220) {
-
     const svg = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg"
@@ -22,7 +20,6 @@ const PitmanRenderer = {
   },
 
   drawLine(svg, x1, y1, x2, y2, weight = "light") {
-
     const line = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "line"
@@ -47,7 +44,6 @@ const PitmanRenderer = {
   },
 
   drawDot(svg, x, y, weight = "light") {
-
     const circle = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "circle"
@@ -67,9 +63,8 @@ const PitmanRenderer = {
 
     return circle;
   },
-  
-  drawDash(svg, x1, y1, x2, y2, weight = "light") {
 
+  drawDash(svg, x1, y1, x2, y2, weight = "light") {
     return this.drawLine(
       svg,
       x1,
@@ -78,7 +73,31 @@ const PitmanRenderer = {
       y2,
       weight
     );
+  },
+
+  drawStroke(svg, stroke, x, y, size = 80, weight = "light") {
+
+    const paths = {
+      down45: [x, y, x + size * 0.7, y + size],
+      down90: [x, y, x, y + size],
+      down30: [x, y, x + size * 0.5, y + size],
+      horizontal: [x, y, x + size, y]
+    };
+
+    const p = paths[stroke];
+
+    if (!p) {
+      return null;
+    }
+
+    return this.drawLine(
+      svg,
+      p[0],
+      p[1],
+      p[2],
+      p[3],
+      weight
+    );
   }
 
-};
 };
