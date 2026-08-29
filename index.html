@@ -355,158 +355,129 @@
 
 
   <script>
+function convertText() {
 
-    function convertText() {
+  const text = document
+    .getElementById("englishText")
+    .value
+    .trim();
 
-      const text =
-        document
-        .getElementById("englishText")
-        .value
-        .trim();
+  const result =
+    document.getElementById("result");
+
+  if (!text) {
+    result.innerHTML =
+      "Please enter some English text.";
+    return;
+  }
+
+  result.innerHTML = "";
+
+  const englishOutput =
+    document.createElement("div");
+
+  englishOutput.className =
+    "english-output";
+
+  englishOutput.innerHTML =
+    "<strong>English:</strong><br>" + text;
+
+  result.appendChild(englishOutput);
 
 
-      const result =
-        document
-        .getElementById("result");
+  const pitmanHeading =
+    document.createElement("div");
+
+  pitmanHeading.className =
+    "pitman-heading";
+
+  pitmanHeading.innerHTML = "Pitman:";
+
+  result.appendChild(pitmanHeading);
 
 
-      if (!text) {
+  const paper =
+    document.createElement("div");
 
-        result.innerHTML =
-          "Please enter some English text.";
-
-        return;
-      }
+  paper.className = "steno-paper";
 
 
-      result.innerHTML = "";
+  const words =
+    PitmanEngine.splitWords(text);
+
+  const wordsPerLine = 6;
+
+  const linesNeeded =
+    Math.max(
+      3,
+      Math.ceil(words.length / wordsPerLine)
+    );
 
 
-      const englishOutput =
-        document.createElement("div");
+  let wordIndex = 0;
 
-      englishOutput.className =
-        "english-output";
+  for (let i = 0; i < linesNeeded; i++) {
 
-      englishOutput.innerHTML =
-        "<strong>English:</strong><br>" +
-        text;
+    const line =
+      document.createElement("div");
 
-      result.appendChild(
-        englishOutput
+    line.className = "steno-line";
+
+
+    const svg =
+      PitmanRenderer.createSVG(
+        700,
+        41
+      );
+
+    svg.style.width = "100%";
+    svg.style.height = "41px";
+
+
+    let x = 20;
+
+    const wordsOnThisLine =
+      words.slice(
+        wordIndex,
+        wordIndex + wordsPerLine
       );
 
 
-      const pitmanHeading =
-        document.createElement("div");
+    wordsOnThisLine.forEach((word) => {
 
-      pitmanHeading.className =
-        "pitman-heading";
+      const letter = word[0];
 
-      pitmanHeading.innerHTML =
-        "Pitman:";
+      const data =
+        PitmanEngine.consonants[letter];
 
-      result.appendChild(
-        pitmanHeading
-      );
+      if (data) {
 
-
-      const paper =
-        document.createElement("div");
-
-      paper.className =
-        "steno-paper";
-
-
-      /*
-       * Calculate how many notebook lines
-       * are needed according to the text.
-       */
-
-      const words =
-        text.split(/\s+/);
-
-
-      const wordsPerLine = 6;
-
-
-      const linesNeeded =
-        Math.max(
-          3,
-          Math.ceil(
-            words.length /
-            wordsPerLine
-          )
+        PitmanRenderer.drawStroke(
+          svg,
+          data.direction,
+          x,
+          5,
+          28,
+          data.weight
         );
 
-
-      /*
-       * Create notebook lines.
-       */
-
-      for (
-        let i = 0;
-        i < linesNeeded;
-        i++
-      ) {
-
-        const line =
-          document.createElement("div");
-
-
-        line.className =
-          "steno-line";
-
-
-        /*
-         * Create an SVG for every
-         * notebook line.
-         */
-
-        if (
-          typeof PitmanRenderer !==
-          "undefined"
-        ) {
-
-          const svg =
-            PitmanRenderer.createSVG(
-              700,
-              41
-            );
-
-
-          svg.style.width =
-            "100%";
-
-
-          svg.style.height =
-            "41px";
-
-
-          line.appendChild(svg);
-
-        }
-
-
-        paper.appendChild(line);
-
       }
 
+      x += 90;
 
-      result.appendChild(paper);
+    });
 
 
-      const warning =
-        document.createElement("div");
+    wordIndex += wordsPerLine;
 
-      warning.className =
-        "warning";
+    line.appendChild(svg);
 
-      warning.innerHTML =
-        "⚠️ The accurate Pitman conversion engine is being developed. " +
-        "The notebook-style writing area is now ready for shorthand strokes.";
+    paper.appendChild(line);
 
-      result.appendChild(warning);
+  }
+
+
+  result.appendChild(paper);
 
     }
 
