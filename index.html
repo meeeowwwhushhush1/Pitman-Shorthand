@@ -356,129 +356,112 @@
 
   <script>
 function convertText() {
-
   const text = document
     .getElementById("englishText")
     .value
     .trim();
 
-  const result =
-    document.getElementById("result");
+  const result = document.getElementById("result");
 
   if (!text) {
-    result.innerHTML =
-      "Please enter some English text.";
+    result.innerHTML = "Please enter some English text.";
     return;
   }
 
   result.innerHTML = "";
 
-  const englishOutput =
-    document.createElement("div");
-
-  englishOutput.className =
-    "english-output";
-
-  englishOutput.innerHTML =
+  const english = document.createElement("div");
+  english.innerHTML =
     "<strong>English:</strong><br>" + text;
 
-  result.appendChild(englishOutput);
+  result.appendChild(english);
+
+  const pitmanTitle = document.createElement("div");
+  pitmanTitle.innerHTML =
+    "<br><strong>Pitman:</strong><br><br>";
+
+  result.appendChild(pitmanTitle);
 
 
-  const pitmanHeading =
-    document.createElement("div");
+  const words = PitmanEngine.splitWords(text);
 
-  pitmanHeading.className =
-    "pitman-heading";
+  const wordsPerLine = 5;
+  const totalLines = Math.ceil(words.length / wordsPerLine);
 
-  pitmanHeading.innerHTML = "Pitman:";
+  const svgHeight = Math.max(
+    180,
+    totalLines * 90 + 40
+  );
 
-  result.appendChild(pitmanHeading);
+  const svg = PitmanRenderer.createSVG(
+    700,
+    svgHeight
+  );
 
 
-  const paper =
-    document.createElement("div");
+  for (let line = 0; line < totalLines; line++) {
 
-  paper.className = "steno-paper";
+    const y = 70 + line * 90;
 
-
-  const words =
-    PitmanEngine.splitWords(text);
-
-  const wordsPerLine = 6;
-
-  const linesNeeded =
-    Math.max(
-      3,
-      Math.ceil(words.length / wordsPerLine)
+    PitmanRenderer.drawLine(
+      svg,
+      30,
+      y,
+      670,
+      y,
+      "light"
     );
-
-
-  let wordIndex = 0;
-
-  for (let i = 0; i < linesNeeded; i++) {
-
-    const line =
-      document.createElement("div");
-
-    line.className = "steno-line";
-
-
-    const svg =
-      PitmanRenderer.createSVG(
-        700,
-        41
-      );
-
-    svg.style.width = "100%";
-    svg.style.height = "41px";
-
-
-    let x = 20;
-
-    const wordsOnThisLine =
-      words.slice(
-        wordIndex,
-        wordIndex + wordsPerLine
-      );
-
-
-    wordsOnThisLine.forEach((word) => {
-
-      const letter = word[0];
-
-      const data =
-        PitmanEngine.consonants[letter];
-
-      if (data) {
-
-        PitmanRenderer.drawStroke(
-          svg,
-          data.direction,
-          x,
-          5,
-          28,
-          data.weight
-        );
-
-      }
-
-      x += 90;
-
-    });
-
-
-    wordIndex += wordsPerLine;
-
-    line.appendChild(svg);
-
-    paper.appendChild(line);
 
   }
 
 
-  result.appendChild(paper);
+  let x = 70;
+  let y = 40;
 
+  words.forEach((word, index) => {
+
+    const letters = word.split("");
+
+    letters.forEach((letter) => {
+
+      if (
+        PitmanEngine.consonants &&
+        PitmanEngine.consonants[letter]
+      ) {
+
+        const stroke =
+          PitmanEngine.consonants[letter];
+
+        PitmanRenderer.drawStroke(
+          svg,
+          stroke.direction,
+          x,
+          y,
+          35,
+          stroke.weight
+        );
+
+        x += 45;
+
+      }
+
+    });
+
+
+    x += 35;
+
+
+    if ((index + 1) % wordsPerLine === 0) {
+
+      x = 70;
+      y += 90;
+
+    }
+
+  });
+
+
+  result.appendChild(svg);
     }
 
   </script>
