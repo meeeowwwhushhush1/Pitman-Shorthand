@@ -1,8 +1,7 @@
-// Pitman Shorthand SVG Renderer
-
 const PitmanRenderer = {
 
-  createSVG(width = 700, height = 220) {
+  createSVG(width = 700, height = 120) {
+
     const svg = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "svg"
@@ -12,14 +11,16 @@ const PitmanRenderer = {
     svg.setAttribute("height", height);
     svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
 
-    svg.style.maxWidth = "100%";
+    svg.style.width = "100%";
     svg.style.height = "auto";
     svg.style.display = "block";
 
     return svg;
   },
 
+
   drawLine(svg, x1, y1, x2, y2, weight = "light") {
+
     const line = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "line"
@@ -32,7 +33,7 @@ const PitmanRenderer = {
 
     line.setAttribute(
       "stroke-width",
-      weight === "heavy" ? "6" : "2.5"
+      weight === "heavy" ? "5" : "2"
     );
 
     line.setAttribute("stroke", "black");
@@ -43,7 +44,9 @@ const PitmanRenderer = {
     return line;
   },
 
-  drawDot(svg, x, y, weight = "light") {
+
+  drawDot(svg, x, y) {
+
     const circle = document.createElementNS(
       "http://www.w3.org/2000/svg",
       "circle"
@@ -51,53 +54,122 @@ const PitmanRenderer = {
 
     circle.setAttribute("cx", x);
     circle.setAttribute("cy", y);
-
-    circle.setAttribute(
-      "r",
-      weight === "heavy" ? "5" : "2.5"
-    );
-
+    circle.setAttribute("r", "3");
     circle.setAttribute("fill", "black");
 
     svg.appendChild(circle);
-
-    return circle;
   },
 
-  drawDash(svg, x1, y1, x2, y2, weight = "light") {
-    return this.drawLine(
+
+  drawDash(svg, x, y) {
+
+    this.drawLine(
       svg,
-      x1,
-      y1,
-      x2,
-      y2,
-      weight
+      x - 8,
+      y,
+      x + 8,
+      y,
+      "light"
     );
   },
 
-  drawStroke(svg, stroke, x, y, size = 80, weight = "light") {
 
-    const paths = {
-      down45: [x, y, x + size * 0.7, y + size],
-      down90: [x, y, x, y + size],
-      down30: [x, y, x + size * 0.5, y + size],
-      horizontal: [x, y, x + size, y]
-    };
+  drawConsonant(svg, direction, x, y, weight) {
 
-    const p = paths[stroke];
+    let endX = x;
+    let endY = y;
 
-    if (!p) {
-      return null;
+    if (direction === "down45") {
+      endX = x + 35;
+      endY = y + 35;
     }
 
-    return this.drawLine(
+    if (direction === "down90") {
+      endX = x;
+      endY = y + 45;
+    }
+
+    if (direction === "horizontal") {
+      endX = x + 45;
+      endY = y;
+    }
+
+    this.drawLine(
       svg,
-      p[0],
-      p[1],
-      p[2],
-      p[3],
+      x,
+      y,
+      endX,
+      endY,
       weight
     );
+
+    return {
+      x: endX,
+      y: endY
+    };
+  },
+
+
+  drawWord(svg, outline, startX, baselineY) {
+
+    let x = startX;
+    let y = baselineY;
+
+    let vowel = null;
+
+    for (const item of outline) {
+
+      if (item.kind === "vowel") {
+        vowel = item;
+        continue;
+      }
+
+      if (item.kind === "consonant") {
+
+        const beforeX = x;
+        const beforeY = y;
+
+        const end = this.drawConsonant(
+          svg,
+          item.direction,
+          x,
+          y,
+          item.weight
+        );
+
+        if (vowel) {
+
+          const midX = (beforeX + end.x) / 2;
+          const midY = (beforeY + end.y) / 2;
+
+          if (vowel.type === "dot") {
+            this.drawDot(
+              svg,
+              midX + 5,
+              midY - 10
+            );
+          }
+
+          if (vowel.type === "dash") {
+            this.drawDash(
+              svg,
+              midX + 10,
+              midY - 10
+            );
+          }
+
+          vowel = null;
+        }
+
+        x = end.x;
+        y = end.y;
+      }
+    }
+
+    return {
+      x,
+      y
+    };
   }
 
 };
