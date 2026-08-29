@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
   <title>Pitman Shorthand</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background: #f5f7fb;
+      background: #f4f7fb;
       color: #172033;
       line-height: 1.6;
     }
@@ -27,340 +27,496 @@
     header {
       background: #172033;
       color: white;
-      padding: 28px 18px;
+      padding: 25px 20px;
       text-align: center;
     }
 
     header h1 {
-      font-size: 30px;
-      margin-bottom: 6px;
-    }
-
-    header p {
-      opacity: 0.85;
+      font-size: 28px;
     }
 
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 10;
       background: white;
-      border-bottom: 1px solid #ddd;
-      padding: 12px;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 15px;
       overflow-x: auto;
-      white-space: nowrap;
     }
 
     nav a {
-      display: inline-block;
       color: #172033;
       text-decoration: none;
       font-weight: bold;
-      margin: 0 9px;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
     }
 
     main {
-      max-width: 950px;
+      max-width: 900px;
       margin: auto;
-      padding: 25px 16px;
+      padding: 25px 15px;
     }
 
-    .hero {
+    .intro {
       text-align: center;
-      padding: 25px 0;
-    }
-
-    .hero h2 {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
-
-    .hero p {
-      color: #596273;
+      margin-bottom: 25px;
+      font-size: 20px;
     }
 
     .card {
       background: white;
-      border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 22px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .card h2 {
-      margin-bottom: 12px;
+    h2 {
+      margin-bottom: 20px;
     }
 
     textarea {
       width: 100%;
-      min-height: 150px;
+      min-height: 220px;
+      padding: 18px;
+      font-size: 18px;
+      border: 2px solid #ccd3df;
+      border-radius: 15px;
       resize: vertical;
-      padding: 15px;
-      border: 2px solid #d9deea;
-      border-radius: 12px;
-      font-size: 17px;
-      font-family: inherit;
-      outline: none;
     }
 
-    textarea:focus {
-      border-color: #172033;
-    }
-
-    .button {
+    button {
       width: 100%;
-      margin-top: 14px;
-      padding: 14px;
+      margin-top: 20px;
+      padding: 18px;
       border: none;
-      border-radius: 11px;
+      border-radius: 15px;
       background: #172033;
       color: white;
-      font-size: 17px;
+      font-size: 20px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .button:active {
-      transform: scale(0.99);
+    #result {
+      margin-top: 30px;
+      padding: 25px;
+      background: #eef1f7;
+      border-radius: 18px;
+      min-height: 150px;
+      overflow: hidden;
     }
 
-    .result {
-      margin-top: 18px;
-      min-height: 100px;
-      padding: 18px;
-      background: #f5f7fb;
-      border-radius: 12px;
-      border: 1px solid #e0e4ec;
+    .english-output {
+      font-size: 18px;
+      margin-bottom: 25px;
     }
 
-    .notice {
-      padding: 13px;
-      background: #fff7df;
-      border-radius: 10px;
-      margin-top: 15px;
-      color: #5f4b00;
-    }
-
-    .search {
-      width: 100%;
-      padding: 14px;
-      border: 2px solid #d9deea;
-      border-radius: 10px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .topics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      margin-top: 15px;
-    }
-
-    .topic {
-      background: #f5f7fb;
-      border: 1px solid #e0e4ec;
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
+    .pitman-heading {
+      font-size: 22px;
       font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    /* NOTEBOOK / COPY STYLE PAPER */
+
+    .steno-paper {
+      width: 100%;
+      min-height: 150px;
+
+      background-image:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 39px,
+          #607080 40px,
+          #607080 41px
+        );
+
+      background-size: 100% 41px;
+
+      padding-top: 0;
+
+      border-radius: 5px;
+
+      overflow-x: auto;
+    }
+
+    .steno-line {
+      width: 100%;
+      height: 41px;
+      position: relative;
+    }
+
+    .steno-line svg {
+      width: 100%;
+      height: 41px;
+      display: block;
+    }
+
+    .warning {
+      margin-top: 25px;
+      padding: 20px;
+      background: #fff5d6;
+      border-radius: 15px;
+      font-size: 17px;
+    }
+
+    .learn-section {
+      margin-top: 20px;
     }
 
     footer {
       background: #172033;
       color: white;
       text-align: center;
-      padding: 28px 15px;
+      padding: 25px;
       margin-top: 30px;
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 25px;
+
+      nav {
+        justify-content: flex-start;
       }
 
-      .hero h2 {
+      header h1 {
         font-size: 23px;
       }
 
-      main {
-        padding: 18px 12px;
+      .card {
+        padding: 20px;
       }
+
     }
-    .steno-paper {
-  margin-top: 12px;
-  min-height: 120px;
-  padding: 18px 12px;
-  border-radius: 8px;
 
-  background-image:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 39px,
-      #9fb7d1 40px,
-      #9fb7d1 41px
-    );
-
-  background-size: 100% 41px;
-  overflow-x: auto;
-      }
   </style>
 </head>
 
+
 <body>
 
-<header>
-  <h1>✍️ Pitman Shorthand</h1>
-  <p>Learn, search and explore Pitman Shorthand</p>
-</header>
+  <header>
+    <h1>Pitman Shorthand</h1>
+  </header>
 
-<nav>
-  <a href="#converter">Converter</a>
-  <a href="#learn">Learn</a>
-  <a href="#history">History</a>
-  <a href="#dictionary">Dictionary</a>
-  <a href="#resources">Resources</a>
-</nav>
 
-<main>
+  <nav>
 
-  <section class="hero">
-    <h2>English → Pitman Shorthand</h2>
-    <p>Enter English text and get its Pitman Shorthand representation.</p>
-  </section>
+    <a href="#converter">
+      Converter
+    </a>
 
-  <section class="card" id="converter">
-    <h2>🔤 Shorthand Converter</h2>
+    <a href="#learn">
+      Learn
+    </a>
 
-    <textarea id="englishText"
-      placeholder="Type English text here...&#10;&#10;Example: I am a boy"></textarea>
+    <a href="#history">
+      History
+    </a>
 
-    <button class="button" onclick="convertText()">
-      Convert to Pitman Shorthand
-    </button>
+    <a href="#dictionary">
+      Dictionary
+    </a>
 
-    <div class="result" id="result">
-      Your result will appear here.
-    </div>
+    <a href="#resources">
+      Resources
+    </a>
 
-    <div class="notice">
-      ⚠️ The accurate Pitman conversion engine is being developed.
-      The current interface is ready for the conversion system.
-    </div>
-  </section>
+  </nav>
 
-  <section class="card" id="learn">
-    <h2>📚 Learn Pitman Shorthand</h2>
 
-    <input
-      class="search"
-      type="search"
-      placeholder="Search a Pitman topic..."
-    >
+  <main>
 
-    <div class="topics">
-      <div class="topic">Consonants</div>
-      <div class="topic">Vowels</div>
-      <div class="topic">Diphthongs</div>
-      <div class="topic">Circles</div>
-      <div class="topic">Loops</div>
-      <div class="topic">Hooks</div>
-      <div class="topic">Halving</div>
-      <div class="topic">Doubling</div>
-      <div class="topic">Grammalogues</div>
-      <div class="topic">Phraseography</div>
-    </div>
-  </section>
-
-  <section class="card" id="history">
-    <h2>📖 History of Shorthand</h2>
-    <p>
-      This section will explain the history of shorthand, the development
-      of Pitman Shorthand, and its evolution over time.
+    <p class="intro">
+      Enter English text and get its Pitman Shorthand representation.
     </p>
-  </section>
 
-  <section class="card" id="dictionary">
-    <h2>🔎 Pitman Dictionary</h2>
 
-    <input
-      class="search"
-      type="search"
-      placeholder="Search for an English word..."
-    >
+    <section
+      class="card"
+      id="converter">
 
-    <div class="result">
-      Search results will appear here.
-    </div>
-  </section>
+      <h2>
+        🔤 Shorthand Converter
+      </h2>
 
-  <section class="card" id="resources">
-    <h2>📚 Books & Resources</h2>
+
+      <textarea
+        id="englishText"
+        placeholder="Enter English text here...">
+      </textarea>
+
+
+      <button
+        onclick="convertText()">
+
+        Convert to Pitman Shorthand
+
+      </button>
+
+
+      <div id="result">
+
+        <p>
+          Your Pitman Shorthand will appear here.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <section
+      class="card"
+      id="learn">
+
+      <h2>
+        📚 Learn Pitman Shorthand
+      </h2>
+
+      <p>
+        This section can contain lessons about
+        vowels, consonants, strokes and Pitman
+        shorthand rules.
+      </p>
+
+    </section>
+
+
+
+    <section
+      class="card"
+      id="history">
+
+      <h2>
+        📜 History
+      </h2>
+
+      <p>
+        Pitman Shorthand was developed by
+        Sir Isaac Pitman and became one of
+        the most widely used shorthand systems.
+      </p>
+
+    </section>
+
+
+
+    <section
+      class="card"
+      id="dictionary">
+
+      <h2>
+        📖 Dictionary
+      </h2>
+
+      <p>
+        Search for Pitman shorthand words and
+        learn their shorthand representation.
+      </p>
+
+    </section>
+
+
+
+    <section
+      class="card"
+      id="resources">
+
+      <h2>
+        📚 Books & Resources
+      </h2>
+
+      <p>
+        Useful learning resources and historical
+        material will be added here.
+      </p>
+
+    </section>
+
+
+  </main>
+
+
+  <footer>
+
     <p>
-      This section will contain useful learning resources, references,
-      historical material and legally usable public-domain resources.
+      © 2026 Pitman Shorthand Project
     </p>
-  </section>
 
-</main>
+    <p>
+      Built as an educational resource.
+    </p>
 
-<footer>
-  <p>© 2026 Pitman Shorthand Project</p>
-  <p>Built as an educational resource.</p>
-</footer>
+  </footer>
 
-<script>
-function convertText() {
-  const text = document
-    .getElementById("englishText")
-    .value
-    .trim();
 
-  const result = document.getElementById("result");
 
-  if (!text) {
-    result.innerHTML = "Please enter some English text.";
-    return;
-  }
+  <script>
 
-  result.innerHTML = "";
+    function convertText() {
 
-  const title = document.createElement("div");
-  title.innerHTML =
-    "<strong>English:</strong><br>" + text;
+      const text =
+        document
+        .getElementById("englishText")
+        .value
+        .trim();
 
-  result.appendChild(title);
 
-  const pitmanTitle = document.createElement("div");
-  pitmanTitle.innerHTML =
-    "<br><strong>Pitman:</strong>";
+      const result =
+        document
+        .getElementById("result");
 
-  result.appendChild(pitmanTitle);
 
-  const svg = PitmanRenderer.createSVG(700, 220);
+      if (!text) {
 
-  // Temporary renderer test stroke.
-  // Actual Pitman stroke mapping comes next.
-  PitmanRenderer.drawLine(
-    svg,
-    120,
-    120,
-    300,
-    120,
-    "light"
-  );
+        result.innerHTML =
+          "Please enter some English text.";
 
-  result.appendChild(svg);
-  }
+        return;
+      }
 
-</script>
-<script src="pitman.js"></script>
-<script src="renderer.js"></script>
+
+      result.innerHTML = "";
+
+
+      const englishOutput =
+        document.createElement("div");
+
+      englishOutput.className =
+        "english-output";
+
+      englishOutput.innerHTML =
+        "<strong>English:</strong><br>" +
+        text;
+
+      result.appendChild(
+        englishOutput
+      );
+
+
+      const pitmanHeading =
+        document.createElement("div");
+
+      pitmanHeading.className =
+        "pitman-heading";
+
+      pitmanHeading.innerHTML =
+        "Pitman:";
+
+      result.appendChild(
+        pitmanHeading
+      );
+
+
+      const paper =
+        document.createElement("div");
+
+      paper.className =
+        "steno-paper";
+
+
+      /*
+       * Calculate how many notebook lines
+       * are needed according to the text.
+       */
+
+      const words =
+        text.split(/\s+/);
+
+
+      const wordsPerLine = 6;
+
+
+      const linesNeeded =
+        Math.max(
+          3,
+          Math.ceil(
+            words.length /
+            wordsPerLine
+          )
+        );
+
+
+      /*
+       * Create notebook lines.
+       */
+
+      for (
+        let i = 0;
+        i < linesNeeded;
+        i++
+      ) {
+
+        const line =
+          document.createElement("div");
+
+
+        line.className =
+          "steno-line";
+
+
+        /*
+         * Create an SVG for every
+         * notebook line.
+         */
+
+        if (
+          typeof PitmanRenderer !==
+          "undefined"
+        ) {
+
+          const svg =
+            PitmanRenderer.createSVG(
+              700,
+              41
+            );
+
+
+          svg.style.width =
+            "100%";
+
+
+          svg.style.height =
+            "41px";
+
+
+          line.appendChild(svg);
+
+        }
+
+
+        paper.appendChild(line);
+
+      }
+
+
+      result.appendChild(paper);
+
+
+      const warning =
+        document.createElement("div");
+
+      warning.className =
+        "warning";
+
+      warning.innerHTML =
+        "⚠️ The accurate Pitman conversion engine is being developed. " +
+        "The notebook-style writing area is now ready for shorthand strokes.";
+
+      result.appendChild(warning);
+
+    }
+
+  </script>
+
+
+  <script src="pitman.js"></script>
+
+  <script src="renderer.js"></script>
+
+
 </body>
+
 </html>
