@@ -356,12 +356,14 @@
 
   <script>
 function convertText() {
+
   const text = document
     .getElementById("englishText")
     .value
     .trim();
 
-  const result = document.getElementById("result");
+  const result = document
+    .getElementById("result");
 
   if (!text) {
     result.innerHTML = "Please enter some English text.";
@@ -371,99 +373,54 @@ function convertText() {
   result.innerHTML = "";
 
   const english = document.createElement("div");
+
   english.innerHTML =
-    "<strong>English:</strong><br>" + text;
+    "<strong>English:</strong><br>" +
+    text;
 
   result.appendChild(english);
 
+
   const pitmanTitle = document.createElement("div");
+
   pitmanTitle.innerHTML =
-    "<br><strong>Pitman:</strong><br><br>";
+    "<br><strong>Pitman:</strong>";
 
   result.appendChild(pitmanTitle);
 
 
-  const words = PitmanEngine.splitWords(text);
-
-  const wordsPerLine = 5;
-  const totalLines = Math.ceil(words.length / wordsPerLine);
-
-  const svgHeight = Math.max(
-    180,
-    totalLines * 90 + 40
-  );
+  const words = PitmanEngine.convert(text);
 
   const svg = PitmanRenderer.createSVG(
     700,
-    svgHeight
+    Math.max(140, Math.ceil(words.length / 5) * 90)
   );
 
 
-  for (let line = 0; line < totalLines; line++) {
+  let x = 35;
+  let y = 65;
 
-    const y = 70 + line * 90;
+  words.forEach((item, index) => {
 
-    PitmanRenderer.drawLine(
-      svg,
-      30,
-      y,
-      670,
-      y,
-      "light"
-    );
-
-  }
-
-
-  let x = 70;
-  let y = 70;
-
-  words.forEach((word, index) => {
-
-    const letters = word.split("");
-
-    letters.forEach((letter) => {
-
-      if (
-        PitmanEngine.consonants &&
-        PitmanEngine.consonants[letter]
-      ) {
-
-        const stroke =
-          PitmanEngine.consonants[letter];
-
-        PitmanRenderer.drawStroke(
-          svg,
-          stroke.direction,
-          x,
-          y,
-          35,
-          stroke.weight
-        );
-
-        x += 45;
-
-      }
-
-    });
-
-
-    x += 35;
-
-
-    if ((index + 1) % wordsPerLine === 0) {
-
-      x = 70;
+    if (index > 0 && index % 5 === 0) {
+      x = 35;
       y += 90;
-
     }
 
+    const end = PitmanRenderer.drawWord(
+      svg,
+      item.outline,
+      x,
+      y
+    );
+
+    x = end.x + 45;
   });
 
 
   result.appendChild(svg);
-    }
 
+    }
   </script>
 
 
