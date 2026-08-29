@@ -17,18 +17,21 @@ const PitmanEngine = {
   consonants: {
     p: { direction: "down45", weight: "light" },
     b: { direction: "down45", weight: "heavy" },
+
     t: { direction: "down90", weight: "light" },
     d: { direction: "down90", weight: "heavy" },
+
     k: { direction: "horizontal", weight: "light" },
     g: { direction: "horizontal", weight: "heavy" }
   },
 
   vowels: {
-    a: { type: "dot", position: "middle", weight: "light" },
-    e: { type: "dot", position: "middle", weight: "light" },
-    i: { type: "dot", position: "middle", weight: "light" },
-    o: { type: "dash", position: "middle", weight: "light" },
-    u: { type: "dash", position: "middle", weight: "light" }
+    a: { type: "dot", position: "before" },
+    e: { type: "dot", position: "middle" },
+    i: { type: "dot", position: "after" },
+
+    o: { type: "dash", position: "before" },
+    u: { type: "dash", position: "middle" }
   },
 
   getOutline(word) {
@@ -39,7 +42,7 @@ const PitmanEngine = {
       if (this.consonants[char]) {
         outline.push({
           kind: "consonant",
-          char,
+          char: char,
           ...this.consonants[char]
         });
       }
@@ -47,10 +50,11 @@ const PitmanEngine = {
       if (this.vowels[char]) {
         outline.push({
           kind: "vowel",
-          char,
+          char: char,
           ...this.vowels[char]
         });
       }
+
     }
 
     return outline;
